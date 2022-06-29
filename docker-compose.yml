@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  PreencherDocumentoDeRPATask:
-    image: preencherdocumentoderpatask
-    hostname: PreencherDocumentoDeRPATask
+  PreencherDocumentoDeRPA:
+    image: preencherdocumentoderpa
+    hostname: PreencherDocumentoDeRPA
     restart: unless-stopped
     build:
       context: .
