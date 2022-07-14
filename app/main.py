@@ -40,20 +40,21 @@ if __name__ == '__main__':
 
             target_path = home + '/outputs/'
 
-            rapDocName, emailPrestador = preencherRpa(rpaID, template, variables)
+            rapDocName, emailPrestador = preencherRpa(
+                rpaID, template, variables)
 
             taskVariables = {
                 'rapDocName': {
                     'name': 'rapDocName',
                     'value': rapDocName
                 },
-                'emailPrestador' : {
+                'emailPrestador': {
                     'name': 'emailPrestador',
                     'value': emailPrestador
                 }
             }
 
-            if docDocumentoDeCPF is not '':
+            if docDocumentoDeCPF != '':
                 docDocumentoDeCPF = 'https://finan.cett.dev.br' + docDocumentoDeCPF
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - CPF.{ext}'.format(
@@ -63,9 +64,8 @@ if __name__ == '__main__':
                         'name': 'docDocumentoDeCPF',
                         'value': docName
                     }
-                
 
-            if docRG is not '':
+            if docRG != '':
                 docRG = 'https://finan.cett.dev.br' + docRG
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - RG.{ext}'.format(
@@ -76,8 +76,7 @@ if __name__ == '__main__':
                         'value': docName
                     }
 
-
-            if docPIS is not '':
+            if docPIS != '':
                 docPIS = 'https://finan.cett.dev.br' + docPIS
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - PIS.{ext}'.format(
@@ -88,31 +87,31 @@ if __name__ == '__main__':
                         'value': docName
                     }
 
-            if docComprovanteEndereco is not '':
+            if docComprovanteEndereco != '':
                 docComprovanteEndereco = 'https://finan.cett.dev.br' + docComprovanteEndereco
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - Comprovante de endereço.{ext}'.format(
                     rpaID=rpaID, ext=ext)
                 if ftp.download_document(
-                    docComprovanteEndereco, target_path + docName) is True:
+                        docComprovanteEndereco, target_path + docName) is True:
                     taskVariables['docComprovanteEndereco'] = {
                         'name': 'docComprovanteEndereco',
                         'value': docName
                     }
 
-            if docCertidaoCasamento is not '':
+            if docCertidaoCasamento != '':
                 docCertidaoCasamento = 'https://finan.cett.dev.br' + docCertidaoCasamento
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - Certidão de casamento.{ext}'.format(
                     rpaID=rpaID, ext=ext)
                 if ftp.download_document(
-                    docCertidaoCasamento, target_path + docName) is True:
+                        docCertidaoCasamento, target_path + docName) is True:
                     taskVariables['docCertidaoCasamento'] = {
                         'name': 'docCertidaoCasamento',
                         'value': docName
                     }
 
-            if docCpfDependente is not '':
+            if docCpfDependente != '':
                 docCpfDependente = 'https://finan.cett.dev.br' + docCpfDependente
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - CPF do dependente.{ext}'.format(
@@ -123,20 +122,18 @@ if __name__ == '__main__':
                         'value': docName
                     }
 
-            if docIdentidadeConjuge is not '':
+            if docIdentidadeConjuge != '':
                 print(docIdentidadeConjuge, type(docIdentidadeConjuge))
                 docIdentidadeConjuge = 'https://finan.cett.dev.br' + docIdentidadeConjuge
                 ext = docDocumentoDeCPF.split('.')[-1]
                 docName = 'Contrato RPA nº {rpaID} - RG do Conjuge.{ext}'.format(
                     rpaID=rpaID, ext=ext)
                 if ftp.download_document(
-                    docIdentidadeConjuge, target_path + docName) is True:
+                        docIdentidadeConjuge, target_path + docName) is True:
                     taskVariables['docIdentidadeConjuge'] = {
                         'name': 'docIdentidadeConjuge',
                         'value': docName
                     }
-
-            print(taskVariables)
 
             worker.complete_task(task.id_, taskVariables)
             del ftp
