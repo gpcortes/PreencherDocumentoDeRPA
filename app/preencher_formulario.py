@@ -7,6 +7,7 @@ import sys
 import subprocess
 import re
 import os
+import ftplib
 
 home = expanduser("~")
 
@@ -35,7 +36,6 @@ def convert_to(source, folder, timeout=None):
         raise LibreOfficeError(process.stdout.decode())
     else:
         return os.path.basename(filename.group(1))
-
 
 def libreoffice_exec():
     # TODO Provide support for more platforms

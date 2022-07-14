@@ -1,5 +1,5 @@
 {
-    "python.defaultInterpreterPath": ".venv/bin/python",
+    "python.defaultInterpreterPath": "~/.asdf/shims/python3.7",
     "python.pythonPath": ".venv/bin/python",
     "python.terminal.activateEnvironment": true,
     "python.globalModuleInstallation": true,
