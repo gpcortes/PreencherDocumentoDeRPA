@@ -63,9 +63,8 @@ class worker:
         for variable in variables:
             complete.add_variable(
                 name=variables[variable]['name'],
-                type=variables[variable]['type_'],
-                value=variables[variable]['value'],
-                info=variables[variable]['value_info']
+                type_=variables[variable]['type'],
+                value=variables[variable]['value']
             )
 
         try:
