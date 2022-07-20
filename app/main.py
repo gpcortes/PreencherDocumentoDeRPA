@@ -1,4 +1,3 @@
-import tarfile
 from worker import worker
 from preencher_formulario import preencherRpa
 from os.path import expanduser
@@ -13,7 +12,7 @@ worker = worker()
 template = open(home + '/templates/template_rpa.docx', 'rb')
 
 def save_document(target_path, filename, document, text):
-    if filename != '':
+    if filename != '' or filename != None:
         filename = 'https://finan.cett.dev.br' + filename
         ext = filename.split('.')[-1]
         docName = 'Contrato RPA nº {text} - CPF.{ext}'.format(

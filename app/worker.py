@@ -36,9 +36,9 @@ class worker:
         return session
 
     def fetch_tasks(self, topic=None, max_tasks=1, lock_duration=30000):
-        
+
         topic = self.TOPIC if topic is None else topic
-        
+
         fetch_and_lock = pycamunda.externaltask.FetchAndLock(
             url=self.ENG_REST_URL, worker_id=self.WORKER_ID, max_tasks=max_tasks
         )
@@ -62,8 +62,10 @@ class worker:
 
         for variable in variables:
             complete.add_variable(
-                name=variables[variable]['name'], 
-                value=variables[variable]['value']
+                name=variables[variable]['name'],
+                type=variables[variable]['type_'],
+                value=variables[variable]['value'],
+                info=variables[variable]['value_info']
             )
 
         try:
