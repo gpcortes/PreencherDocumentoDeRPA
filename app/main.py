@@ -11,6 +11,7 @@ worker = worker()
 
 template = open(home + '/templates/template_rpa.docx', 'rb')
 
+
 def save_document(target_path, filename, document, text):
     if filename != '' or filename != None:
         filename = 'https://finan.cett.dev.br' + filename
@@ -22,7 +23,6 @@ def save_document(target_path, filename, document, text):
                 'name': document,
                 'value': docName
             }
-
 
 
 if __name__ == '__main__':
@@ -50,9 +50,10 @@ if __name__ == '__main__':
             docCertidaoCasamento = variables['docCertidaoCasamento'] if 'docCertidaoCasamento' in variables else None
             docCpfDependente = variables['docCpfDependente'] if 'docCpfDependente' in variables else None
             docIdentidadeConjuge = variables['docIdentidadeConjuge'] if 'docIdentidadeConjuge' in variables else None
-            numCPF = variables['cpf'] if 'cpf' in variables else None
+            numCPF = variables['cpf'].replace('.', '').replace(
+                '-', '') if 'cpf' in variables else None
 
-            makedirs(numCPF)
+            makedirs(numCPF, exist_ok=True)
 
             target_path = home + '/outputs/' + numCPF
 
@@ -69,8 +70,9 @@ if __name__ == '__main__':
                     'value': emailPrestador
                 }
             }
-            
-            save_document(target_path, docDocumentoDeCPF, 'docDocumentoDeCPF', rpaID)
+
+            save_document(target_path, docDocumentoDeCPF,
+                          'docDocumentoDeCPF', rpaID)
             # if docDocumentoDeCPF != '':
             #     docDocumentoDeCPF = 'https://finan.cett.dev.br' + docDocumentoDeCPF
             #     ext = docDocumentoDeCPF.split('.')[-1]
@@ -106,7 +108,8 @@ if __name__ == '__main__':
             #             'value': docName
             #         }
 
-            save_document(target_path, docComprovanteEndereco, 'docComprovanteEndereco', rpaID)
+            save_document(target_path, docComprovanteEndereco,
+                          'docComprovanteEndereco', rpaID)
             # if docComprovanteEndereco != '':
             #     docComprovanteEndereco = 'https://finan.cett.dev.br' + docComprovanteEndereco
             #     ext = docDocumentoDeCPF.split('.')[-1]
@@ -119,7 +122,8 @@ if __name__ == '__main__':
             #             'value': docName
             #         }
 
-            save_document(target_path, docCertidaoCasamento, 'docCertidaoCasamento', rpaID)
+            save_document(target_path, docCertidaoCasamento,
+                          'docCertidaoCasamento', rpaID)
             # if docCertidaoCasamento != '':
             #     docCertidaoCasamento = 'https://finan.cett.dev.br' + docCertidaoCasamento
             #     ext = docDocumentoDeCPF.split('.')[-1]
@@ -132,7 +136,8 @@ if __name__ == '__main__':
             #             'value': docName
             #         }
 
-            save_document(target_path, docCpfDependente, 'docCpfDependente', rpaID)
+            save_document(target_path, docCpfDependente,
+                          'docCpfDependente', rpaID)
             # if docCpfDependente != '':
             #     docCpfDependente = 'https://finan.cett.dev.br' + docCpfDependente
             #     ext = docDocumentoDeCPF.split('.')[-1]
@@ -144,7 +149,8 @@ if __name__ == '__main__':
             #             'value': docName
             #         }
 
-            save_document(target_path, docIdentidadeConjuge, 'docIdentidadeConjuge', rpaID)
+            save_document(target_path, docIdentidadeConjuge,
+                          'docIdentidadeConjuge', rpaID)
             # if docIdentidadeConjuge != '':
             #     print(docIdentidadeConjuge, type(docIdentidadeConjuge))
             #     docIdentidadeConjuge = 'https://finan.cett.dev.br' + docIdentidadeConjuge
